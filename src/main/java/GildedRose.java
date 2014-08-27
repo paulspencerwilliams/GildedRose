@@ -4,7 +4,13 @@ import java.util.List;
 
 public class GildedRose {
 
-	private List<Item> items = null;
+    public static final String AGED_BRIE = "Aged Brie";
+    public static final String BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT = "Backstage passes to a TAFKAL80ETC concert";
+    public static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
+    public static final String DEXTERITY_VEST = "+5 Dexterity Vest";
+    public static final String ELIXIR_OF_THE_MONGOOSE = "Elixir of the Mongoose";
+    public static final String CONJURED_MANA_CAKE = "Conjured Mana Cake";
+    private List<Item> items = null;
 
     public GildedRose(ArrayList<Item> items) {
         this.items = items;
@@ -16,12 +22,12 @@ public class GildedRose {
 
 
         ArrayList<Item> defaultItems= new ArrayList<Item>();
-        defaultItems.add(new Item("+5 Dexterity Vest", 10, 20));
-        defaultItems.add(new Item("Aged Brie", 2, 0));
-        defaultItems.add(new Item("Elixir of the Mongoose", 5, 7));
-        defaultItems.add(new Item("Sulfuras, Hand of Ragnaros", 0, 80));
-        defaultItems.add(new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20));
-        defaultItems.add(new Item("Conjured Mana Cake", 3, 6));
+        defaultItems.add(new Item(DEXTERITY_VEST, 10, 20));
+        defaultItems.add(new Item(AGED_BRIE, 2, 0));
+        defaultItems.add(new Item(ELIXIR_OF_THE_MONGOOSE, 5, 7));
+        defaultItems.add(new Item(SULFURAS_HAND_OF_RAGNAROS, 0, 80));
+        defaultItems.add(new Item(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT, 15, 20));
+        defaultItems.add(new Item(CONJURED_MANA_CAKE, 3, 6));
         GildedRose gildedRose = new GildedRose(defaultItems);
 
         gildedRose.updateQuality();
@@ -31,74 +37,51 @@ public class GildedRose {
 	
     public void updateQuality()
     {
-        for (int i = 0; i < items.size(); i++)
-        {
-            if ((!"Aged Brie".equals(items.get(i).getName())) && !"Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName()))
-            {
-                if (items.get(i).getQuality() > 0)
-                {
-                    if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName()))
-                    {
-                        items.get(i).setQuality(items.get(i).getQuality() - 1);
+        for (Item item : items) {
+            if ((!AGED_BRIE.equals(item.getName())) && !BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT.equals(item.getName())) {
+                if (item.getQuality() > 0) {
+                    if (!SULFURAS_HAND_OF_RAGNAROS.equals(item.getName())) {
+                        item.setQuality(item.getQuality() - 1);
                     }
                 }
-            }
-            else
-            {
-                if (items.get(i).getQuality() < 50)
-                {
-                    items.get(i).setQuality(items.get(i).getQuality() + 1);
+            } else {
+                if (item.getQuality() < 50) {
+                    item.setQuality(item.getQuality() + 1);
 
-                    if ("Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName()))
-                    {
-                        if (items.get(i).getSellIn() < 11)
-                        {
-                            if (items.get(i).getQuality() < 50)
-                            {
-                                items.get(i).setQuality(items.get(i).getQuality() + 1);
+                    if (BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT.equals(item.getName())) {
+                        if (item.getSellIn() < 11) {
+                            if (item.getQuality() < 50) {
+                                item.setQuality(item.getQuality() + 1);
                             }
                         }
 
-                        if (items.get(i).getSellIn() < 6)
-                        {
-                            if (items.get(i).getQuality() < 50)
-                            {
-                                items.get(i).setQuality(items.get(i).getQuality() + 1);
+                        if (item.getSellIn() < 6) {
+                            if (item.getQuality() < 50) {
+                                item.setQuality(item.getQuality() + 1);
                             }
                         }
                     }
                 }
             }
 
-            if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName()))
-            {
-                items.get(i).setSellIn(items.get(i).getSellIn() - 1);
+            if (!SULFURAS_HAND_OF_RAGNAROS.equals(item.getName())) {
+                item.setSellIn(item.getSellIn() - 1);
             }
 
-            if (items.get(i).getSellIn() < 0)
-            {
-                if (!"Aged Brie".equals(items.get(i).getName()))
-                {
-                    if (!"Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName()))
-                    {
-                        if (items.get(i).getQuality() > 0)
-                        {
-                            if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName()))
-                            {
-                                items.get(i).setQuality(items.get(i).getQuality() - 1);
+            if (item.getSellIn() < 0) {
+                if (!AGED_BRIE.equals(item.getName())) {
+                    if (!BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT.equals(item.getName())) {
+                        if (item.getQuality() > 0) {
+                            if (!SULFURAS_HAND_OF_RAGNAROS.equals(item.getName())) {
+                                item.setQuality(item.getQuality() - 1);
                             }
                         }
+                    } else {
+                        item.setQuality(item.getQuality() - item.getQuality());
                     }
-                    else
-                    {
-                        items.get(i).setQuality(items.get(i).getQuality() - items.get(i).getQuality());
-                    }
-                }
-                else
-                {
-                    if (items.get(i).getQuality() < 50)
-                    {
-                        items.get(i).setQuality(items.get(i).getQuality() + 1);
+                } else {
+                    if (item.getQuality() < 50) {
+                        item.setQuality(item.getQuality() + 1);
                     }
                 }
             }
