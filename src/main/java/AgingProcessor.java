@@ -1,4 +1,3 @@
-
 public class AgingProcessor extends ItemProcessor {
     public AgingProcessor(Item item) {
         super(item);
@@ -7,7 +6,7 @@ public class AgingProcessor extends ItemProcessor {
     @Override
     protected void changeQuantity ()
     {
-        if (underMaxQuality())
+        if (isUnderMaxQuality())
         {
             if (isExpired())
             {

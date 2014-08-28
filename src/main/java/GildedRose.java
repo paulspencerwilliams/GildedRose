@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class GildedRose {
 
     public static final String AGED_BRIE = "Aged Brie";
@@ -17,9 +16,7 @@ public class GildedRose {
     }
 
 	public static void main(String[] args) {
-		
         System.out.println("OMGHAI!");
-
 
         ArrayList<Item> defaultItems= new ArrayList<Item>();
         defaultItems.add(new Item(DEXTERITY_VEST, 10, 20));

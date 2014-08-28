@@ -25,14 +25,13 @@ public class ItemProcessor {
                 item.setQuality(item.getQuality() - 1);
             }
         }
-
     }
 
     protected void reduceSellIn() {
         item.setSellIn(item.getSellIn() -1);
     }
 
-    protected boolean underMaxQuality()
+    protected boolean isUnderMaxQuality()
     {
         return item.getQuality() < 50;
     }

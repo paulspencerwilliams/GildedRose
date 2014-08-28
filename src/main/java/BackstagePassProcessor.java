@@ -12,16 +12,16 @@ public class BackstagePassProcessor extends ItemProcessor {
         }
         else
         {
-            if (underMaxQuality()) {
+            if (isUnderMaxQuality()) {
                 item.setQuality(item.getQuality() + 1);
             }
             if (item.getSellIn() < 6) {
-                if (underMaxQuality()) {
+                if (isUnderMaxQuality()) {
                     item.setQuality(item.getQuality() + 1);
                 }
             }
             if (item.getSellIn() < 11) {
-                if (underMaxQuality()) {
+                if (isUnderMaxQuality()) {
                     item.setQuality(item.getQuality() + 1);
                 }
             }
