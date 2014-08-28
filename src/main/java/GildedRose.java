@@ -47,6 +47,8 @@ public class GildedRose {
             return new AgingProcessor(item);
         } else if (item.getName().equals(SULFURAS_HAND_OF_RAGNAROS)) {
             return new LegendaryItemProcessor(item);
+        } else if (item.getName().equals(CONJURED_MANA_CAKE)) {
+            return new ConjuredItemProcessor(item);
         } else {
             return new ItemProcessor(item);
         }

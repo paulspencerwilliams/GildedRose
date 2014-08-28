@@ -80,6 +80,18 @@ public class GildedRoseTest {
         assertThat(updateQuality("Backstage passes to a TAFKAL80ETC concert", 0, 5).getQuality(), equalTo(0));
     }
 
+    @Test
+    public void conjuredItemsDegradeTwiceAsFastAsNormalItemsBeforeExpiry ()
+    {
+        assertThat(updateQuality("Conjured Mana Cake", 2, 2).getQuality(), equalTo(0));
+    }
+
+    @Test
+    public void conjuredItemsDegradeTwiceAsFastAsNormalItemsAfterExpiry ()
+    {
+        assertThat(updateQuality("Conjured Mana Cake", 0, 4).getQuality(), equalTo(0));
+    }
+
     private Item updateQuality(String name, int sellIn, int quality) {
         ArrayList<Item> items = new ArrayList<Item>();
         Item simpleItem = new Item(name, sellIn, quality);
