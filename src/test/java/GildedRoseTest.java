@@ -9,31 +9,31 @@ import java.util.ArrayList;
 public class GildedRoseTest {
 
     @Test
-    public void qualityReducesByOne ()
+    public void degradesByOne ()
     {
         assertThat(updateQuality("anItem", 2, 1).getQuality(), equalTo(0));
     }
 
     @Test
-    public void sellInIsDecrementedByOne ()
-    {
-        assertThat(updateQuality("anItem", 2, 1).getSellIn(), equalTo(1));
-    }
-
-    @Test
-    public void qualityReducesByTwoOnceExpired ()
+    public void degradesByTwoAfterExpiry ()
     {
         assertThat(updateQuality("anItem", 0, 4).getQuality(), equalTo(2));
     }
 
     @Test
-    public void brieIncreasesInQualityBy1BeforeItExpires ()
+    public void decrementsSellInDateByOne ()
+    {
+        assertThat(updateQuality("anItem", 2, 1).getSellIn(), equalTo(1));
+    }
+
+    @Test
+    public void upgradesByOneForAgingItemsBeforeExpiry()
     {
         assertThat(updateQuality("Aged Brie", 5, 5).getQuality(), equalTo(6));
     }
 
     @Test
-    public void brieIncreasesInQualityBy2AfterItExpires ()
+    public void upgradesByTwoForAgingItemsBeforeExpiry()
     {
         assertThat(updateQuality("Aged Brie", 0, 5).getQuality(), equalTo(7));
     }
@@ -45,49 +45,49 @@ public class GildedRoseTest {
     }
 
     @Test
-    public void SulfurasDontReduce()
+    public void degradesByZeroForLegendaryItems()
     {
         assertThat(updateQuality("Sulfuras, Hand of Ragnaros", 0, 5).getQuality(), equalTo(5));
     }
 
     @Test
-    public void SulfurasDontHaveSellIn()
+    public void decrementsSellInDateByZeroForLegendaryItems()
     {
         assertThat(updateQuality("Sulfuras, Hand of Ragnaros", 5, 5).getQuality(), equalTo(5));
     }
 
     @Test
-    public void BackstagePassesIncreaseBy1Until10DaysToGo ()
+    public void upgradesBy1ForBackstagePassesWithMoreThan10DaysBeforeExpiry ()
     {
         assertThat(updateQuality("Backstage passes to a TAFKAL80ETC concert", 12, 5).getQuality(), equalTo(6));
     }
 
     @Test
-    public void BackstagePassesIncreaseBy2Until10DaysToGo ()
+    public void upgradesBy2ForBackstagePassesWithBetween10And5DaysBeforeExpiry()
     {
         assertThat(updateQuality("Backstage passes to a TAFKAL80ETC concert", 10, 5).getQuality(), equalTo(7));
     }
 
     @Test
-    public void BackstagePassesIncreaseBy3Until5DaysToGo ()
+    public void upgradesBy3ForBackstagePassesWithLessThan5DaysBeforeExpiry ()
     {
         assertThat(updateQuality("Backstage passes to a TAFKAL80ETC concert", 5, 5).getQuality(), equalTo(8));
     }
 
     @Test
-    public void BackstagePassesIncreaseUntilSellIn ()
+    public void losesAllQualityForBackstagePassesAfterExpiry ()
     {
         assertThat(updateQuality("Backstage passes to a TAFKAL80ETC concert", 0, 5).getQuality(), equalTo(0));
     }
 
     @Test
-    public void conjuredItemsDegradeTwiceAsFastAsNormalItemsBeforeExpiry ()
+    public void degradesByTwoForConjuredItemsBeforeExpiry()
     {
         assertThat(updateQuality("Conjured Mana Cake", 2, 2).getQuality(), equalTo(0));
     }
 
     @Test
-    public void conjuredItemsDegradeTwiceAsFastAsNormalItemsAfterExpiry ()
+    public void degradesBy4ForConjuredItemsBeforeExpiry ()
     {
         assertThat(updateQuality("Conjured Mana Cake", 0, 4).getQuality(), equalTo(0));
     }
